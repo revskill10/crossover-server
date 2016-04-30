@@ -4,7 +4,7 @@ class MetricsController < ApplicationController
     current_threshold = get_current_threshold
     check_cpu_usage_against_current_threshold! current_threshold
     deliver_metrics_to_browser!
-    render nothing: true, status: 200
+    return head(200)
   end
 
   protected
@@ -19,9 +19,15 @@ class MetricsController < ApplicationController
   end
   def shutdown_ec2_instance instance_id
     ShutdownJob.perform_later(instance_id)
+    cache_stopped_instances instance_id
   end
   def deliver_metrics_to_browser!
     MetricsBroadcastJob.perform_later metric_params.to_json
+  end
+  def cache_stopped_instances(instance_id)
+    current_stopped_instances = JSON.parse($redis.get("stopped_instances"))
+    current_stopped_instances << instance_id
+    $redis.set("stopped_instances", current_stopped_instances.to_json)
   end
   def metric_params
     params[:metric]
@@ -31,7 +37,7 @@ class MetricsController < ApplicationController
     Rails.application.secrets.auth_token
   end
   def validate_metric_params!
-    render nothing: true, status: 403 and return if metric_params[:auth_token] != auth_token
-    render nothing: true, status: 400 and return if !metric_params[:cpu_usage].present? or !metric_params[:disk_usage].present? or !metric_params[:running_processes].present? or !metric_params[:ec2_instance_id].present?
+    raise NotAuthorizedError if metric_params[:auth_token] != auth_token
+    raise ActionController::ParameterMissing, "Bad Request" if !metric_params[:cpu_usage].present? or !metric_params[:disk_usage].present? or !metric_params[:running_processes].present? or !metric_params[:ec2_instance_id].present?
   end
 end
