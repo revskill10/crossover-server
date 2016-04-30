@@ -7,11 +7,6 @@ App.metrics = App.cable.subscriptions.create "MetricsChannel",
 
   received: (event) ->
     data = event.data
-    if data.action and data.ec2_instance_id and data.ec2_instance_id != 'localhost'
-      if data.action == "destroy"
-        $("metrics-" + data.ec2_instance_id).html("destroying...")
-      if data.action == "terminate"
-        $("metrics-" + data.ec2_instance_id).remove()
 
     unless data.action
       elem = React.createElement(MetricsComponent, ec2_instance_id: data.ec2_instance_id, cpu_usage:data.cpu_usage, disk_usage: data.disk_usage, running_processes:data.running_processes)

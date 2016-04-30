@@ -9,8 +9,7 @@ class ConfigChannel < ApplicationCable::Channel
   end
 
   def update(data)
-    threshold = data
-    $redis.set("threshold", data)
-    ConfigBroadcastJob.perform_later $redis.get("threshold")
+    $redis.set("cpu_threshold", data.to_i)
+    ConfigBroadcastJob.perform_later $redis.get("cpu_threshold")
   end
 end
