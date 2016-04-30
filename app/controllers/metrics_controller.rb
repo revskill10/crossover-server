@@ -3,7 +3,7 @@ class MetricsController < ApplicationController
     validate_metric_params!
     threshold = $redis.get("threshold") || 100
     $redis.set("threshold", threshold)
-    cpu_usage = metric_params[:cpu_usage]
+    cpu_usage = metric_params[:cpu_usage].to_i
     ec2_instance_id = metric_params[:ec2_instance_id]
 
     if ec2_instance_id != 'localhost' and cpu_usage > threshold
