@@ -47,4 +47,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   Rails.application.config.action_cable.allowed_request_origins = ['http://127.0.0.1', 'http://localhost:3000']
+  config.action_cable.url = "ws://54.93.84.183/cable"
+  ActionCable.server.config.disable_request_forgery_protection = true
 end
