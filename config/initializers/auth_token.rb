@@ -1,0 +1,1 @@
+Rails.application.config.auth_token = ENV.fetch("AUTH_TOKEN", "123456")
