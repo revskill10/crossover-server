@@ -17,7 +17,7 @@ class MetricsController < ApplicationController
       shutdown_ec2_instance  instance_id
     end
   end
-  def shutdown_ec2_instance intance_id
+  def shutdown_ec2_instance instance_id
     ShutdownJob.perform_later(instance_id)
   end
   def deliver_metrics_to_browser!
