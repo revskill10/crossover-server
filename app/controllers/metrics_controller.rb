@@ -6,7 +6,7 @@ class MetricsController < ApplicationController
     cpu_usage = metric_params[:cpu_usage].to_i
     ec2_instance_id = metric_params[:ec2_instance_id]
 
-    if ec2_instance_id != 'localhost' and cpu_usage > threshold
+    if ec2_instance_id != 'localhost' and cpu_usage.to_i > threshold.to_i
       $redis.set("threshold", cpu_usage)
 
       MetricsBroadcastJob.perform_later({action: "destroy"}.to_json)
