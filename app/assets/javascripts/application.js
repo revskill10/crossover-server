@@ -17,3 +17,4 @@
 //= require components
 //= require cable
 //= require_tree ./channels
+var bricklayer = new Bricklayer(document.querySelector('.bricklayer'));
