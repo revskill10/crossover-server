@@ -14,7 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require vendors
-//= require components
 //= require cable
-//= require_tree ./channels
+//= require init
+
+
 

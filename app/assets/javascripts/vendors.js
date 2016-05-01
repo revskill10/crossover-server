@@ -1,2 +1,4 @@
-//= require vendor/react.min.js
-//= require vendor/react-dom.min.js
+//= require vendor/react.min
+//= require vendor/react-dom.min
+//= require vendor/redux.min
+//= require vendor/react-redux.min

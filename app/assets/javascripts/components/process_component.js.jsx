@@ -1,7 +1,7 @@
 var ProcessComponent = React.createClass({
     render: function(){
         var running_processes = this.props.running_processes.map(function(running_process){
-            return <tr>
+            return <tr key={"rp-" + running_process.pid}>
                 <td>{running_process.user}</td>
                 <td>{running_process.pid}</td>
                 <td>{running_process.cpu}</td>
@@ -25,3 +25,5 @@ var ProcessComponent = React.createClass({
         </table>
     }
 });
+
+window.ProcessComponent = ProcessComponent;

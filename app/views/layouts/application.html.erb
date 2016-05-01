@@ -3,17 +3,13 @@
   <head>
     <title>CrossoverServer</title>
     <%= csrf_meta_tags %>
+    <%= include_gon %>
+    <%= stylesheet_link_tag    'application', media: 'all'%>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/bricklayer/0.4.2/bricklayer.min.css" %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/bricklayer/0.4.2/bricklayer.min.js" %>
   </head>
 
   <body>
     <%= yield %>
-    <script>
-      var bricklayer = new Bricklayer(document.querySelector('.bricklayer'));
-    </script>
+    <%= javascript_include_tag 'application'%>
   </body>
 </html>

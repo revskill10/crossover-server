@@ -20,6 +20,8 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5.x'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
+gem 'gon'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -30,12 +32,15 @@ gem 'jbuilder', '~> 2.0'
 gem 'react-rails', '~> 1.7.0'
 gem 'aws-sdk'
 gem 'redis'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 
 end
-
+source 'https://rails-assets.org' do
+  gem 'rails-assets-almond'
+end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
